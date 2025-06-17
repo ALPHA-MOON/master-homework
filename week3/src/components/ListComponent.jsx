@@ -1,3 +1,7 @@
+// ListComponent.jsx
+// 순수하게 presentational component로 작성
+// 데이터를 받아서 보여주는 로직은 포함
+
 const ListComponent = ({ todos }) => {
   return (
     <>

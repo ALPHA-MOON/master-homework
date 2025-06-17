@@ -1,4 +1,8 @@
 // useTodos.js
+// 원래 hook으로 작성하려 했으나 데이터를 받아오는 역할만 수행
+// suspense로 처리하기 위해 준비 안됐을 경우 promise를 반환
+// 기존에 cache가 있으면 그걸 반환
+
 import axios from "axios";
 
 let cache;

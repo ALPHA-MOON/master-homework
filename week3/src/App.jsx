@@ -1,3 +1,6 @@
+// App.jsx
+// 전체적인 구조만 작성하며 ErrorBoundary, Suspense, Container 만 작성
+
 import React, { Suspense } from "react";
 import TodoListContainer from "./containers/TodoListContainer";
 import ErrorBoundary from "./components/ErrorBoundary";

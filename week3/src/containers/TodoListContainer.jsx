@@ -1,3 +1,7 @@
+// TodoListContainer.jsx
+// 상태관리 및 데이터 처리 로직 작성
+// container component로 작성
+
 import { useState } from "react";
 import InputComponent from "../components/InputComponent";
 import ListComponent from "../components/ListComponent";

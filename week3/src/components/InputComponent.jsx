@@ -1,3 +1,6 @@
+// InputComponent.jsx
+// 순수하게 presentational component로 작성
+
 const InputComponent = ({ writeTodo, input, doSubmit }) => {
   return (
     <>
