@@ -8,7 +8,7 @@ import { z } from "zod";
 const UserProfileFormContainer = () => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const [userInfo, setUserInfo] = useState<UpdateUserDTO>({
+  const [userInfo, setUserInfo] = useState<z.infer<typeof UpdateUserDTO>>({
     username: "홍길동",
     email: "hong@example.com",
     password: "",
@@ -53,6 +53,7 @@ const UserProfileFormContainer = () => {
           disabled={!isEditing}
           placeholder="사용자 이름을 입력하세요"
         />
+        <UserProfileForm.Message message={errors.username?.message || ""} />
         <UserProfileForm.Input
           label="이메일"
           type="email"
@@ -61,6 +62,7 @@ const UserProfileFormContainer = () => {
           disabled={!isEditing}
           placeholder="이메일을 입력하세요"
         />
+        <UserProfileForm.Message message={errors.email?.message || ""} />
         <UserProfileForm.Input
           label="새 비밀번호"
           type="password"
@@ -69,24 +71,17 @@ const UserProfileFormContainer = () => {
           disabled={!isEditing}
           placeholder={isEditing ? "새 비밀번호를 입력하세요 (선택사항)" : ""}
         />
-        <UserProfileForm.Message
-          message={
-            errors.username?.message ||
-            errors.email?.message ||
-            errors.password?.message ||
-            ""
-          }
-        />
+        <UserProfileForm.Message message={errors.password?.message || ""} />
         {!isEditing ? (
-          <UserProfileForm.Button
+          <UserProfileForm.Button.Primary
             type="button"
             onClick={handleEdit}
             value="수정하기"
           />
         ) : (
           <>
-            <UserProfileForm.Button type="submit" value="저장하기" />
-            <UserProfileForm.Button
+            <UserProfileForm.Button.Primary type="submit" value="저장하기" />
+            <UserProfileForm.Button.Outline
               type="button"
               onClick={handleCancel}
               value="취소"

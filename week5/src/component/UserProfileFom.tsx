@@ -1,16 +1,26 @@
 import type { FC, PropsWithChildren } from "react";
 import type { UpdateUserDTO } from "../DTO/user.dto";
 import type { UseFormRegister } from "react-hook-form";
+import {
+  Form,
+  Label,
+  InputField,
+  TitleStyled,
+  PrimaryButton,
+  OutlineButton,
+  MessageStyled,
+  InputGroup,
+} from "../styled/styled";
 import { z } from "zod";
 
 const UserProfileFormRoot: FC<
   PropsWithChildren<{ onSubmit: (e: React.FormEvent<HTMLFormElement>) => void }>
 > = ({ children, onSubmit }) => {
-  return <form onSubmit={onSubmit}>{children}</form>;
+  return <Form onSubmit={onSubmit}>{children}</Form>;
 };
 
 const Title: FC<{ title: string }> = ({ title }) => {
-  return <h2>{title}</h2>;
+  return <TitleStyled>{title}</TitleStyled>;
 };
 
 const Input: FC<{
@@ -22,34 +32,41 @@ const Input: FC<{
   register: UseFormRegister<z.infer<typeof UpdateUserDTO>>;
 }> = ({ label, name, disabled, placeholder, type, register }) => {
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
-      <input
+    <InputGroup>
+      <Label htmlFor={name}>{label}</Label>
+      <InputField
         type={type}
         id={name}
         {...register(name as keyof z.infer<typeof UpdateUserDTO>)}
         disabled={disabled}
         placeholder={placeholder}
       />
-    </div>
+    </InputGroup>
   );
 };
 
-const Button: FC<{
+type ButtonProps = {
   type: "submit" | "button";
   onClick?: () => void;
   value: string;
-}> = ({ type, onClick, value }) => {
-  return (
-    <button type={type} onClick={onClick}>
+};
+
+const Button = {
+  Primary: ({ type, onClick, value }: ButtonProps) => (
+    <PrimaryButton type={type} onClick={onClick}>
       {value}
-    </button>
-  );
+    </PrimaryButton>
+  ),
+  Outline: ({ type, onClick, value }: ButtonProps) => (
+    <OutlineButton type={type} onClick={onClick}>
+      {value}
+    </OutlineButton>
+  ),
 };
 
 const Message: FC<{ message: string }> = ({ message }) => {
   if (!message) return null;
-  return <p>{message}</p>;
+  return <MessageStyled>{message}</MessageStyled>;
 };
 
 const UserProfileForm = Object.assign(UserProfileFormRoot, {
